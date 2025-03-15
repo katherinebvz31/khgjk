@@ -11,19 +11,31 @@ const Home = () => {
   const [salidas, setSalidas] = useState([]);
 
   useEffect(() => {
-    // Cargar los productos desde un archivo Excel local
-    fetch("/productos.xlsx")
-      .then((res) => res.arrayBuffer())
-      .then((data) => {
+    async function cargarProductos() {
+      try {
+        const response = await fetch("/productos.xlsx");
+        if (!response.ok) {
+          throw new Error(`No se pudo cargar productos.xlsx (Error ${response.status})`);
+        }
+
+        const data = await response.arrayBuffer();
         const workbook = XLSX.read(data, { type: "array" });
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(sheet);
+
         const productosMap = {};
         jsonData.forEach((producto) => {
           productosMap[producto.Codigo] = producto;
         });
+
         setProductos(productosMap);
-      });
+        console.log("Productos cargados:", productosMap);
+      } catch (error) {
+        console.error("Error al cargar el archivo de productos:", error);
+      }
+    }
+
+    cargarProductos();
   }, []);
 
   const agregarSalida = () => {
