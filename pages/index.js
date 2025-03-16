@@ -48,7 +48,7 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[230px]">
+      <div className="max-w-4xl mx-auto mt-[200px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
@@ -92,17 +92,29 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Vista previa del producto (solo nombre y unidad) */}
+        {/* Vista previa del producto con nombre, unidad y la imagen en la misma fila */}
         {productos[codigo] && (
-          <div className="mt-6 text-center">
-            <h2 className="text-2xl font-bold text-white">
-              {productos[codigo].PRODUCTO}
-            </h2>
-            <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-white">
+                {productos[codigo].PRODUCTO}
+              </h2>
+              <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
+            </div>
+            <div className="w-[100px] h-[100px] border border-gray-300 rounded shadow-sm bg-white">
+              <div className="relative w-[100px] h-[100px]">
+                <Image
+                  src={`/imagenes/${codigo}.jpg`}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="Producto"
+                />
+              </div>
+            </div>
           </div>
         )}
 
-        {/* Tabla de registros con columna de imagen centrada */}
+        {/* Tabla de registros con columna de imagen */}
         <div className="mt-8">
           <table className="w-full bg-white rounded shadow overflow-hidden">
             <thead className="bg-[#08422a] text-white">
