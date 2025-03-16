@@ -10,6 +10,26 @@ const Home = () => {
   const [productos, setProductos] = useState({});
   const [salidas, setSalidas] = useState([]);
 
+  // Función para obtener la fecha actual en formato YYYY-MM-DD
+  const getTodayKey = () => {
+    return new Date().toISOString().slice(0, 10); // Ej: "2025-03-16"
+  };
+
+  // Al cargar la página, carga los registros almacenados para hoy
+  useEffect(() => {
+    const todayKey = getTodayKey();
+    const storedData = localStorage.getItem(`salidas-${todayKey}`);
+    if (storedData) {
+      setSalidas(JSON.parse(storedData));
+    }
+  }, []);
+
+  // Cada vez que "salidas" cambie, actualiza el localStorage para hoy
+  useEffect(() => {
+    const todayKey = getTodayKey();
+    localStorage.setItem(`salidas-${todayKey}`, JSON.stringify(salidas));
+  }, [salidas]);
+
   useEffect(() => {
     fetch("/productos.xlsx")
       .then((res) => res.arrayBuffer())
@@ -42,8 +62,8 @@ const Home = () => {
     setCantidad("");
   };
 
-  // Función para generar y descargar el Excel con los datos de salidas
   const downloadExcel = () => {
+    // Genera el Excel a partir de "salidas" almacenadas
     const worksheet = XLSX.utils.json_to_sheet(salidas);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Registro Diario");
@@ -65,7 +85,7 @@ const Home = () => {
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
       <div className="max-w-4xl mx-auto mt-[200px] relative">
-        {/* Botón para descargar Excel en la esquina superior derecha */}
+        {/* Botón para descargar Excel */}
         <button
           onClick={downloadExcel}
           className="absolute top-4 right-4 bg-black p-2 rounded-full hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
@@ -85,7 +105,7 @@ const Home = () => {
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs y botón sin imagen previa */}
+        {/* Fila de inputs y botón */}
         <div className="mt-6 flex items-center justify-center gap-4">
           <input
             type="number"
