@@ -37,7 +37,8 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    setSalidas([...salidas, nuevoRegistro]);
+    // Agregamos al inicio para que el registro más reciente aparezca primero
+    setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
   };
@@ -47,73 +48,91 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[230px]">
+      <div className="max-w-4xl mx-auto mt-[200px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
-        <div className="mt-4 flex justify-center">
-          {/* Campo "Código" configurado para aceptar solo números */}
+
+        {/* Fila de inputs y recuadro de imagen */}
+        <div className="mt-6 flex items-center justify-center gap-4">
+          {/* Input Código: solo números */}
           <input
             type="number"
             placeholder="Código"
             value={codigo}
             onChange={(e) => setCodigo(e.target.value)}
-            className="p-2 border rounded mr-2 text-black"
+            className="p-2 border rounded text-black shadow-sm"
           />
+
+          {/* Input Cantidad */}
           <input
             type="number"
             placeholder="Cantidad"
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
-            className="p-2 border rounded text-black"
+            className="p-2 border rounded text-black shadow-sm"
           />
-          <button
-            onClick={agregarSalida}
-            className="ml-2 bg-black text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300"
-          >
-            Agregar
-          </button>
-        </div>
 
-        {productos[codigo] && (
-          <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center w-full max-w-xs mx-auto">
-            <h2 className="text-xl font-bold text-black">
-              {productos[codigo].PRODUCTO}
-            </h2>
-            <p className="text-black">Unidad: {productos[codigo].UNIDAD}</p>
-            <div className="mt-2">
+          {/* Casillero de imagen: fijo, mostrando el producto si existe */}
+          <div className="w-24 h-24 border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
+            {productos[codigo] ? (
               <Image
                 src={`/imagenes/${codigo}.jpg`}
                 width={100}
                 height={100}
                 alt="Producto"
               />
-            </div>
+            ) : (
+              <span className="text-gray-400 text-xs">Imagen</span>
+            )}
+          </div>
+        </div>
+
+        {/* Botón Agregar */}
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={agregarSalida}
+            className="bg-black text-white px-6 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
+          >
+            Agregar
+          </button>
+        </div>
+
+        {/* Información del producto (opcional, si se desea mostrar arriba del registro) */}
+        {productos[codigo] && (
+          <div className="mt-6 text-center">
+            <h2 className="text-2xl font-bold text-white">
+              {productos[codigo].PRODUCTO}
+            </h2>
+            <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
           </div>
         )}
 
-        <table className="mt-4 w-full bg-white rounded shadow">
-          <thead>
-            <tr>
-              <th className="p-2 border text-[#08422a] font-bold">Fecha</th>
-              <th className="p-2 border text-[#08422a] font-bold">Código</th>
-              <th className="p-2 border text-[#08422a] font-bold">Nombre</th>
-              <th className="p-2 border text-[#08422a] font-bold">Unidad</th>
-              <th className="p-2 border text-[#08422a] font-bold">Cantidad</th>
-            </tr>
-          </thead>
-          <tbody>
-            {salidas.map((salida, index) => (
-              <tr key={index}>
-                <td className="p-2 border text-black">{salida.fecha}</td>
-                <td className="p-2 border text-black">{salida.codigo}</td>
-                <td className="p-2 border text-black">{salida.nombre}</td>
-                <td className="p-2 border text-black">{salida.unidad}</td>
-                <td className="p-2 border text-black">{salida.cantidad}</td>
+        {/* Registro de salidas: los registros nuevos aparecen en la parte superior */}
+        <div className="mt-8">
+          <table className="w-full bg-white rounded shadow overflow-hidden">
+            <thead className="bg-[#08422a] text-white">
+              <tr>
+                <th className="p-2 border">Fecha</th>
+                <th className="p-2 border">Código</th>
+                <th className="p-2 border">Nombre</th>
+                <th className="p-2 border">Unidad</th>
+                <th className="p-2 border">Cantidad</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {salidas.map((salida, index) => (
+                <tr key={index} className="text-black">
+                  <td className="p-2 border">{salida.fecha}</td>
+                  <td className="p-2 border">{salida.codigo}</td>
+                  <td className="p-2 border">{salida.nombre}</td>
+                  <td className="p-2 border">{salida.unidad}</td>
+                  <td className="p-2 border">{salida.cantidad}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
