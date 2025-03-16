@@ -47,7 +47,8 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto">
+      {/* Contenedor interno con un margen superior fijo */}
+      <div className="max-w-4xl mx-auto pt-12">
         <h1 className="text-center text-3xl font-bold text-white">Registro de Salidas</h1>
         <div className="mt-4 flex justify-center">
           <input
