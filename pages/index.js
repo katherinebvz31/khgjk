@@ -47,8 +47,8 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      {/* Contenedor principal sin centrar verticalmente; el contenido fluye desde arriba */}
-      <div className="max-w-4xl mx-auto mt-[70px]">
+      {/* Contenedor centrado con un margen superior de 200px */}
+      <div className="max-w-4xl mx-auto mt-[200px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
@@ -75,7 +75,6 @@ const Home = () => {
           </button>
         </div>
 
-        {/* Si el código corresponde a un producto, se muestra la imagen y se insertan debajo */}
         {productos[codigo] && (
           <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center">
             <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
@@ -91,7 +90,6 @@ const Home = () => {
           </div>
         )}
 
-        {/* La tabla se posiciona debajo y se desplaza hacia abajo al agregar nuevos registros */}
         <table className="mt-4 w-full bg-white rounded shadow">
           <thead>
             <tr>
