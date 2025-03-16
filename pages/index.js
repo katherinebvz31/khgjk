@@ -48,12 +48,12 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[230px]">
+      <div className="max-w-4xl mx-auto mt-[200px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs, botón y casillero de imagen fijo */}
+        {/* Fila de inputs y botón (sin casillero de imagen) */}
         <div className="mt-6 flex items-center justify-center gap-4">
           <input
             type="number"
@@ -75,9 +75,18 @@ const Home = () => {
           >
             Agregar
           </button>
-          {/* Casillero de imagen fijo */}
-          <div className="w-[100px] h-[100px] border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
-            {productos[codigo] ? (
+        </div>
+
+        {/* Vista previa del producto con nombre, unidad e imagen */}
+        {productos[codigo] && (
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-white">
+                {productos[codigo].PRODUCTO}
+              </h2>
+              <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
+            </div>
+            <div className="w-[100px] h-[100px] border border-gray-300 rounded shadow-sm bg-white">
               <div className="relative w-[100px] h-[100px]">
                 <Image
                   src={`/imagenes/${codigo}.jpg`}
@@ -86,11 +95,9 @@ const Home = () => {
                   alt="Producto"
                 />
               </div>
-            ) : (
-              <span className="text-gray-400 text-xs">Imagen</span>
-            )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Tabla de registros con columna de imagen */}
         <div className="mt-8">
@@ -126,7 +133,9 @@ const Home = () => {
                         </div>
                       </div>
                     ) : (
-                      <span className="text-gray-400 text-xs">Sin imagen</span>
+                      <span className="text-gray-400 text-xs">
+                        Sin imagen
+                      </span>
                     )}
                   </td>
                 </tr>
@@ -141,4 +150,3 @@ const Home = () => {
 };
 
 export default dynamic(() => Promise.resolve(Home), { ssr: false });
-
