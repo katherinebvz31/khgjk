@@ -11,33 +11,30 @@ const Home = () => {
   const [salidas, setSalidas] = useState([]);
 
   useEffect(() => {
-    // Cargar los productos desde el archivo Excel
+    // Cargar los productos desde un archivo Excel local
     fetch("/productos.xlsx")
       .then((res) => res.arrayBuffer())
       .then((data) => {
         const workbook = XLSX.read(data, { type: "array" });
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(sheet);
-
-        console.log("📊 Datos cargados del Excel:", jsonData); // <--- Verificamos los datos en consola
-
         const productosMap = {};
         jsonData.forEach((producto) => {
           productosMap[producto.Codigo] = producto;
         });
         setProductos(productosMap);
+        console.log("📊 Datos cargados del Excel:", jsonData);
       })
-      .catch((error) => console.error("🚨 Error cargando Excel:", error));
+      .catch((error) => console.error("⚠️ Error cargando el archivo Excel:", error));
   }, []);
 
   const agregarSalida = () => {
-    if (!productos[codigo] || !cantidad) {
+    if (!codigo || !cantidad) {
       console.warn("⚠️ Código o cantidad vacíos");
       return;
     }
-
     if (!productos[codigo]) {
-      console.warn("❌ Código no encontrado en el Excel");
+      console.warn("⚠️ Código no encontrado en la base de datos");
       return;
     }
 
@@ -48,18 +45,15 @@ const Home = () => {
       unidad: productos[codigo].Unidad,
       cantidad,
     };
-
-    console.log("✅ Registro agregado:", nuevoRegistro); // <--- Confirmamos en consola
-
     setSalidas([...salidas, nuevoRegistro]);
     setCodigo("");
     setCantidad("");
+    console.log("✅ Registro agregado:", nuevoRegistro);
   };
 
   return (
     <div className="min-h-screen bg-cover bg-center p-4" style={{ backgroundImage: "url('/fondo.jpg')" }}>
       <h1 className="text-white text-3xl font-bold">Registro de Salidas</h1>
-
       <div className="mt-4">
         <input
           type="text"
@@ -75,11 +69,8 @@ const Home = () => {
           onChange={(e) => setCantidad(e.target.value)}
           className="p-2 border rounded"
         />
-        <button onClick={agregarSalida} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">
-          Agregar
-        </button>
+        <button onClick={agregarSalida} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Agregar</button>
       </div>
-
       {productos[codigo] && (
         <div className="mt-4 bg-white p-4 rounded shadow-md">
           <h2 className="text-xl font-bold">{productos[codigo].Nombre}</h2>
@@ -87,7 +78,6 @@ const Home = () => {
           <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
         </div>
       )}
-
       <table className="mt-4 w-full bg-white rounded shadow-md">
         <thead>
           <tr>
