@@ -43,69 +43,65 @@ const Home = () => {
   };
 
   return (
-    // Contenedor del fondo
     <div
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      {/* Contenedor fijo para el contenido, centrado en la pantalla */}
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-full max-w-4xl p-4 bg-white bg-opacity-90 rounded shadow-md">
-          <h1 className="text-center text-3xl font-bold text-[#08422a]">Registro de Salidas</h1>
-          <div className="mt-4 flex justify-center">
-            <input
-              type="text"
-              placeholder="Código"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
-              className="p-2 border rounded mr-2 text-black"
-            />
-            <input
-              type="number"
-              placeholder="Cantidad"
-              value={cantidad}
-              onChange={(e) => setCantidad(e.target.value)}
-              className="p-2 border rounded text-black"
-            />
-            <button
-              onClick={agregarSalida}
-              className="ml-2 bg-black text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300"
-            >
-              Agregar
-            </button>
-          </div>
-          {productos[codigo] && (
-            <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center">
-              <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
-              <p>Unidad: {productos[codigo].UNIDAD}</p>
-              <div className="flex justify-center w-full">
-                <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
-              </div>
-            </div>
-          )}
-          <table className="mt-4 w-full bg-white rounded shadow">
-            <thead>
-              <tr>
-                <th className="p-2 border text-[#08422a] font-bold">Fecha</th>
-                <th className="p-2 border text-[#08422a] font-bold">Código</th>
-                <th className="p-2 border text-[#08422a] font-bold">Nombre</th>
-                <th className="p-2 border text-[#08422a] font-bold">Unidad</th>
-                <th className="p-2 border text-[#08422a] font-bold">Cantidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              {salidas.map((salida, index) => (
-                <tr key={index}>
-                  <td className="p-2 border text-black">{salida.fecha}</td>
-                  <td className="p-2 border text-black">{salida.codigo}</td>
-                  <td className="p-2 border text-black">{salida.nombre}</td>
-                  <td className="p-2 border text-black">{salida.unidad}</td>
-                  <td className="p-2 border text-black">{salida.cantidad}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-center text-3xl font-bold text-white">Registro de Salidas</h1>
+        <div className="mt-4 flex justify-center">
+          <input
+            type="text"
+            placeholder="Código"
+            value={codigo}
+            onChange={(e) => setCodigo(e.target.value)}
+            className="p-2 border rounded mr-2 text-black"
+          />
+          <input
+            type="number"
+            placeholder="Cantidad"
+            value={cantidad}
+            onChange={(e) => setCantidad(e.target.value)}
+            className="p-2 border rounded text-black"
+          />
+          <button
+            onClick={agregarSalida}
+            className="ml-2 bg-black text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300"
+          >
+            Agregar
+          </button>
         </div>
+        {productos[codigo] && (
+          <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center">
+            <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
+            <p>Unidad: {productos[codigo].UNIDAD}</p>
+            <div className="flex justify-center w-full">
+              <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
+            </div>
+          </div>
+        )}
+        <table className="mt-4 w-full bg-white rounded shadow">
+          <thead>
+            <tr>
+              <th className="p-2 border text-[#08422a] font-bold">Fecha</th>
+              <th className="p-2 border text-[#08422a] font-bold">Código</th>
+              <th className="p-2 border text-[#08422a] font-bold">Nombre</th>
+              <th className="p-2 border text-[#08422a] font-bold">Unidad</th>
+              <th className="p-2 border text-[#08422a] font-bold">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {salidas.map((salida, index) => (
+              <tr key={index}>
+                <td className="p-2 border text-black">{salida.fecha}</td>
+                <td className="p-2 border text-black">{salida.codigo}</td>
+                <td className="p-2 border text-black">{salida.nombre}</td>
+                <td className="p-2 border text-black">{salida.unidad}</td>
+                <td className="p-2 border text-black">{salida.cantidad}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
