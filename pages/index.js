@@ -37,7 +37,7 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    // Los nuevos registros se agregan al inicio para que los más recientes aparezcan primero
+    // Se agregan al inicio para que los registros más recientes aparezcan primero
     setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
@@ -45,7 +45,7 @@ const Home = () => {
 
   return (
     <div
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
       <div className="max-w-4xl mx-auto mt-[200px]">
@@ -75,13 +75,15 @@ const Home = () => {
           >
             Agregar
           </button>
-          {/* Casillero de imagen fijo al lado */}
-          <div className="w-24 h-24 border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
+          {/* Casillero de imagen fijo con tamaño definido */}
+          <div className="w-[100px] h-[100px] border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
             {productos[codigo] ? (
               <Image
                 src={`/imagenes/${codigo}.jpg`}
                 width={100}
                 height={100}
+                layout="fixed"
+                objectFit="contain"
                 alt="Producto"
               />
             ) : (
@@ -90,7 +92,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Vista previa del producto sin imagen (sólo nombre y unidad) */}
+        {/* Vista previa del producto (nombre y unidad) */}
         {productos[codigo] && (
           <div className="mt-6 text-center">
             <h2 className="text-2xl font-bold text-white">
@@ -127,12 +129,12 @@ const Home = () => {
                         src={`/imagenes/${salida.codigo}.jpg`}
                         width={100}
                         height={100}
+                        layout="fixed"
+                        objectFit="contain"
                         alt="Producto"
                       />
                     ) : (
-                      <span className="text-gray-400 text-xs">
-                        Sin imagen
-                      </span>
+                      <span className="text-gray-400 text-xs">Sin imagen</span>
                     )}
                   </td>
                 </tr>
