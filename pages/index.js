@@ -42,6 +42,23 @@ const Home = () => {
     setCantidad("");
   };
 
+  // Función para generar y descargar el Excel con los datos de salidas
+  const downloadExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(salidas);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Registro Diario");
+    const wbout = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([wbout], { type: "application/octet-stream" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "registro_diario.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
@@ -50,7 +67,7 @@ const Home = () => {
       <div className="max-w-4xl mx-auto mt-[200px] relative">
         {/* Botón para descargar Excel en la esquina superior derecha */}
         <button
-          onClick={() => window.location.href = "/api/generate-excel"}
+          onClick={downloadExcel}
           className="absolute top-4 right-4 bg-black p-2 rounded-full hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
         >
           <svg
@@ -158,6 +175,7 @@ const Home = () => {
             </tbody>
           </table>
         </div>
+
       </div>
     </div>
   );
