@@ -1,8 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
+  @apply bg-cover bg-center bg-no-repeat h-screen m-0 font-montserrat text-white;
   background-image: url('/fondo.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  margin: 0;
 }
