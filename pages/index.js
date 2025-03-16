@@ -76,10 +76,12 @@ const Home = () => {
         </div>
 
         {productos[codigo] && (
-          <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center">
-            <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
-            <p>Unidad: {productos[codigo].UNIDAD}</p>
-            <div className="flex justify-center w-full">
+          <div className="mt-4 flex flex-col items-center">
+            <h2 className="text-xl font-bold text-white">
+              {productos[codigo].PRODUCTO}
+            </h2>
+            <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
+            <div className="mt-2">
               <Image
                 src={`/imagenes/${codigo}.jpg`}
                 width={100}
