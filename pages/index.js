@@ -47,8 +47,7 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      {/* Contenedor centrado con margen superior de 200px */}
-      <div className="max-w-4xl mx-auto mt-[200px]">
+      <div className="max-w-4xl mx-auto mt-[230px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
@@ -76,11 +75,11 @@ const Home = () => {
         </div>
 
         {productos[codigo] && (
-          <div className="mt-4 flex flex-col items-center">
-            <h2 className="text-xl font-bold text-white">
+          <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center w-full max-w-xs">
+            <h2 className="text-xl font-bold text-black">
               {productos[codigo].PRODUCTO}
             </h2>
-            <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
+            <p className="text-black">Unidad: {productos[codigo].UNIDAD}</p>
             <div className="mt-2">
               <Image
                 src={`/imagenes/${codigo}.jpg`}
@@ -105,18 +104,4 @@ const Home = () => {
           <tbody>
             {salidas.map((salida, index) => (
               <tr key={index}>
-                <td className="p-2 border text-black">{salida.fecha}</td>
-                <td className="p-2 border text-black">{salida.codigo}</td>
-                <td className="p-2 border text-black">{salida.nombre}</td>
-                <td className="p-2 border text-black">{salida.unidad}</td>
-                <td className="p-2 border text-black">{salida.cantidad}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
-
-export default dynamic(() => Promise.resolve(Home), { ssr: false });
+                <td className="p-2 border 
