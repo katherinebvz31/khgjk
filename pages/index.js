@@ -18,50 +18,35 @@ const Home = () => {
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(sheet);
         const productosMap = {};
-
         jsonData.forEach((producto) => {
-          if (producto["CÓDIGO"] && producto["PRODUCTO"] && producto["UNIDAD"]) {
-            productosMap[producto["CÓDIGO"].toString().trim()] = {
-              nombre: producto["PRODUCTO"],
-              unidad: producto["UNIDAD"]
-            };
-          }
+          productosMap[producto.CÓDIGO] = producto;
         });
-
-        console.log("📊 Datos cargados del Excel:", jsonData);
         setProductos(productosMap);
-      })
-      .catch((error) => console.error("❌ Error cargando el Excel:", error));
+      });
   }, []);
 
   const agregarSalida = () => {
-    if (!codigo.trim() || !cantidad.trim()) {
-      console.warn("⚠️ Código o cantidad vacíos");
+    if (!productos[codigo] || !cantidad) {
+      console.warn("⚠️ Código no encontrado en la base de datos o cantidad vacía");
       return;
     }
-
-    if (!productos[codigo]) {
-      console.warn("⚠️ Código no encontrado en la base de datos");
-      return;
-    }
-
     const nuevoRegistro = {
       fecha: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
       codigo,
-      nombre: productos[codigo].nombre,
-      unidad: productos[codigo].unidad,
-      cantidad
+      nombre: productos[codigo].PRODUCTO,
+      unidad: productos[codigo].UNIDAD,
+      cantidad,
     };
-
     setSalidas([...salidas, nuevoRegistro]);
     setCodigo("");
     setCantidad("");
   };
 
   return (
-   <div
-  className="min-h-screen bg-cover bg-center bg-no-repeat flex flex-col items-center p-4"
-  style={{ backgroundImage: "url('/fondo.jpg')" }}>
+    <div
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center p-4"
+      style={{ backgroundImage: "url('/fondo.jpg')", backgroundSize: "cover", backgroundPosition: "center", height: "100vh" }}
+    >
       <h1 className="text-white text-3xl font-bold">Registro de Salidas</h1>
       <div className="mt-4">
         <input
@@ -80,15 +65,13 @@ const Home = () => {
         />
         <button onClick={agregarSalida} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Agregar</button>
       </div>
-
       {productos[codigo] && (
         <div className="mt-4 bg-white p-4 rounded shadow-md">
-          <h2 className="text-xl font-bold">{productos[codigo].nombre}</h2>
-          <p>Unidad: {productos[codigo].unidad}</p>
+          <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
+          <p>Unidad: {productos[codigo].UNIDAD}</p>
           <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
         </div>
       )}
-
       <table className="mt-4 w-full bg-white rounded shadow-md">
         <thead>
           <tr>
