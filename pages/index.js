@@ -37,7 +37,7 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    // Agregamos el nuevo registro al inicio para mostrar los más recientes primero
+    // Los nuevos registros se agregan al inicio para que los más recientes aparezcan primero
     setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
@@ -45,15 +45,15 @@ const Home = () => {
 
   return (
     <div
-      className="h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[250px]">
+      <div className="max-w-4xl mx-auto mt-[200px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs, botón y casillero de imagen */}
+        {/* Fila de inputs, botón y casillero de imagen fijo */}
         <div className="mt-6 flex items-center justify-center gap-4">
           <input
             type="number"
@@ -90,21 +90,13 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Vista previa del producto */}
+        {/* Vista previa del producto sin imagen (sólo nombre y unidad) */}
         {productos[codigo] && (
           <div className="mt-6 text-center">
             <h2 className="text-2xl font-bold text-white">
               {productos[codigo].PRODUCTO}
             </h2>
             <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
-            <div className="mt-2 inline-block">
-              <Image
-                src={`/imagenes/${codigo}.jpg`}
-                width={100}
-                height={100}
-                alt="Producto"
-              />
-            </div>
           </div>
         )}
 
