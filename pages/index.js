@@ -37,7 +37,7 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    // Agregamos al inicio para que los registros más recientes aparezcan primero
+    // Agregamos el nuevo registro al inicio para que los más recientes aparezcan primero
     setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
@@ -48,7 +48,7 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[200px]">
+      <div className="max-w-4xl mx-auto mt-[230px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
@@ -92,30 +92,17 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Vista previa del producto (nombre y unidad) */}
+        {/* Vista previa del producto (solo nombre y unidad) */}
         {productos[codigo] && (
           <div className="mt-6 text-center">
             <h2 className="text-2xl font-bold text-white">
               {productos[codigo].PRODUCTO}
             </h2>
             <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
-            <div className="mt-2 flex items-center justify-center">
-              {/* Contenedor fijo para la imagen en la vista previa */}
-              <div className="w-[100px] h-[100px] border border-gray-300 rounded shadow-sm bg-white">
-                <div className="relative w-[100px] h-[100px]">
-                  <Image
-                    src={`/imagenes/${codigo}.jpg`}
-                    layout="fill"
-                    objectFit="contain"
-                    alt="Producto"
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         )}
 
-        {/* Tabla de registros con columna de imagen */}
+        {/* Tabla de registros con columna de imagen centrada */}
         <div className="mt-8">
           <table className="w-full bg-white rounded shadow overflow-hidden">
             <thead className="bg-[#08422a] text-white">
@@ -136,7 +123,7 @@ const Home = () => {
                   <td className="p-2 border">{salida.nombre}</td>
                   <td className="p-2 border">{salida.unidad}</td>
                   <td className="p-2 border">{salida.cantidad}</td>
-                  <td className="p-2 border">
+                  <td className="p-2 border flex items-center justify-center">
                     {productos[salida.codigo] ? (
                       <div className="w-[100px] h-[100px] border border-gray-300 rounded shadow-sm bg-white">
                         <div className="relative w-[100px] h-[100px]">
@@ -149,7 +136,9 @@ const Home = () => {
                         </div>
                       </div>
                     ) : (
-                      <span className="text-gray-400 text-xs">Sin imagen</span>
+                      <span className="text-gray-400 text-xs">
+                        Sin imagen
+                      </span>
                     )}
                   </td>
                 </tr>
