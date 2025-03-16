@@ -70,13 +70,15 @@ const Home = () => {
   Agregar
 </button>
       </div>
-      {productos[codigo] && (
-        <div className="mt-4 bg-white p-4 rounded shadow-md">
-          <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
-          <p>Unidad: {productos[codigo].UNIDAD}</p>
-          <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
-        </div>
-      )}
+    {productos[codigo] && (
+  <div className="mt-4 bg-white p-4 rounded shadow-md flex flex-col items-center">
+    <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
+    <p>Unidad: {productos[codigo].UNIDAD}</p>
+    <div className="flex justify-center w-full">
+      <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
+    </div>
+  </div>
+)}
       <table className="mt-4 w-full bg-white rounded shadow-md">
         <thead>
           <tr>
