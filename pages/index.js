@@ -47,7 +47,23 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[200px]">
+      <div className="max-w-4xl mx-auto mt-[200px] relative">
+        {/* Botón para descargar Excel en la esquina superior derecha */}
+        <button
+          onClick={() => window.location.href = "/api/generate-excel"}
+          className="absolute top-4 right-4 bg-black p-2 rounded-full hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
@@ -142,7 +158,6 @@ const Home = () => {
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   );
