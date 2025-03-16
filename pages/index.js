@@ -47,8 +47,8 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      {/* Contenedor centrado con margen superior fijo */}
-      <div className="max-w-4xl mx-auto mt-12">
+      {/* Aumentamos el margen superior para que todo inicie más abajo */}
+      <div className="max-w-4xl mx-auto mt-24">
         <h1 className="text-center text-3xl font-bold text-white">Registro de Salidas</h1>
         <div className="mt-4 flex justify-center">
           <input
@@ -73,7 +73,6 @@ const Home = () => {
           </button>
         </div>
 
-        {/* Cuando se ingresa un código válido, la imagen del producto aparecerá debajo y empujará el contenido */}
         {productos[codigo] && (
           <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center">
             <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
@@ -84,7 +83,6 @@ const Home = () => {
           </div>
         )}
 
-        {/* Tabla que se empuja hacia abajo al agregar nuevos registros */}
         <table className="mt-4 w-full bg-white rounded shadow">
           <thead>
             <tr>
