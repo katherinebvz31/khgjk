@@ -37,7 +37,7 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    // Agregamos al inicio para que los registros más recientes aparezcan primero
+    // Agregamos el nuevo registro al inicio para mostrar los más recientes primero
     setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
@@ -45,7 +45,7 @@ const Home = () => {
 
   return (
     <div
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat p-4"
+      className="h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
       <div className="max-w-4xl mx-auto mt-[200px]">
@@ -53,9 +53,8 @@ const Home = () => {
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs y botón con casillero de imagen fijo al costado */}
+        {/* Fila de inputs, botón y casillero de imagen */}
         <div className="mt-6 flex items-center justify-center gap-4">
-          {/* Campo "Código": solo números */}
           <input
             type="number"
             placeholder="Código"
@@ -63,7 +62,6 @@ const Home = () => {
             onChange={(e) => setCodigo(e.target.value)}
             className="p-2 border rounded text-black shadow-sm"
           />
-          {/* Campo "Cantidad" */}
           <input
             type="number"
             placeholder="Cantidad"
@@ -71,7 +69,6 @@ const Home = () => {
             onChange={(e) => setCantidad(e.target.value)}
             className="p-2 border rounded text-black shadow-sm"
           />
-          {/* Botón Agregar */}
           <button
             onClick={agregarSalida}
             className="bg-black text-white px-6 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
@@ -93,17 +90,25 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Vista previa del producto (se muestra si el código es válido) */}
+        {/* Vista previa del producto */}
         {productos[codigo] && (
           <div className="mt-6 text-center">
             <h2 className="text-2xl font-bold text-white">
               {productos[codigo].PRODUCTO}
             </h2>
             <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
+            <div className="mt-2 inline-block">
+              <Image
+                src={`/imagenes/${codigo}.jpg`}
+                width={100}
+                height={100}
+                alt="Producto"
+              />
+            </div>
           </div>
         )}
 
-        {/* Tabla de registros con columna de imagen al final */}
+        {/* Tabla de registros con columna de imagen */}
         <div className="mt-8">
           <table className="w-full bg-white rounded shadow overflow-hidden">
             <thead className="bg-[#08422a] text-white">
@@ -128,12 +133,14 @@ const Home = () => {
                     {productos[salida.codigo] ? (
                       <Image
                         src={`/imagenes/${salida.codigo}.jpg`}
-                        width={50}
-                        height={50}
+                        width={100}
+                        height={100}
                         alt="Producto"
                       />
                     ) : (
-                      <span className="text-gray-400 text-xs">Sin imagen</span>
+                      <span className="text-gray-400 text-xs">
+                        Sin imagen
+                      </span>
                     )}
                   </td>
                 </tr>
