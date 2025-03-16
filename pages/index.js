@@ -44,11 +44,11 @@ const Home = () => {
 
   return (
     <div
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      {/* Contenedor centrado con un margen superior de 200px */}
-      <div className="max-w-4xl mx-auto mt-[250px]">
+      {/* Contenedor centrado con margen superior de 200px */}
+      <div className="max-w-4xl mx-auto mt-[200px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
