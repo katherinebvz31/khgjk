@@ -48,7 +48,7 @@ const Home = () => {
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
       {/* Contenedor centrado con un margen superior de 200px */}
-      <div className="max-w-4xl mx-auto mt-[230px]">
+      <div className="max-w-4xl mx-auto mt-[250px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
