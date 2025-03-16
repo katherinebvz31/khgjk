@@ -47,8 +47,8 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      {/* Contenedor interno con un margen superior fijo */}
-      <div className="max-w-4xl mx-auto pt-12">
+      {/* Contenedor interno con margen superior para fijar la posición original */}
+      <div className="max-w-4xl mx-auto mt-12">
         <h1 className="text-center text-3xl font-bold text-white">Registro de Salidas</h1>
         <div className="mt-4 flex justify-center">
           <input
@@ -72,6 +72,7 @@ const Home = () => {
             Agregar
           </button>
         </div>
+        {/* Al digitar el código, si se encuentra el producto, aparece la imagen y se desplaza el contenido hacia abajo */}
         {productos[codigo] && (
           <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center">
             <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
