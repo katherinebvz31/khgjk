@@ -47,8 +47,8 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      {/* Aumentamos el margen superior para que todo inicie más abajo */}
-      <div className="max-w-4xl mx-auto mt-76">
+      {/* Contenedor centrado con margen superior de 70px */}
+      <div className="max-w-4xl mx-auto mt-[70px]">
         <h1 className="text-center text-3xl font-bold text-white">Registro de Salidas</h1>
         <div className="mt-4 flex justify-center">
           <input
