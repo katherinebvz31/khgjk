@@ -69,12 +69,13 @@ const Home = () => {
             onChange={(e) => setCantidad(e.target.value)}
             className="p-2 border rounded text-black shadow-sm"
           />
-          <button
-            onClick={agregarSalida}
-            className="bg-[#08422a] text-white px-6 py-2 rounded hover:bg-white hover:text-[#08422a] transition-colors duration-300 shadow-sm"
-          >
-            Agregar
-          </button>
+         <button
+  onClick={agregarSalida}
+  className="bg-black text-white px-6 py-2 rounded active:bg-white active:text-black hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
+>
+  Agregar
+</button>
+
           {/* Casillero de imagen fijo */}
           <div className="w-[100px] h-[100px] border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
             {productos[codigo] ? (
