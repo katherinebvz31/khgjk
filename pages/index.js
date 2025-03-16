@@ -104,4 +104,18 @@ const Home = () => {
           <tbody>
             {salidas.map((salida, index) => (
               <tr key={index}>
-                <td className="p-2 border 
+                <td className="p-2 border text-black">{salida.fecha}</td>
+                <td className="p-2 border text-black">{salida.codigo}</td>
+                <td className="p-2 border text-black">{salida.nombre}</td>
+                <td className="p-2 border text-black">{salida.unidad}</td>
+                <td className="p-2 border text-black">{salida.cantidad}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default dynamic(() => Promise.resolve(Home), { ssr: false });
