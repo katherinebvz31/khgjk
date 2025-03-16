@@ -63,9 +63,12 @@ const Home = () => {
           onChange={(e) => setCantidad(e.target.value)}
           className="p-2 border rounded text-black"
         />
-        <button onClick={agregarSalida} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">
-          Agregar
-        </button>
+       <button
+  onClick={agregarSalida}
+  className="ml-2 bg-black text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300"
+>
+  Agregar
+</button>
       </div>
       {productos[codigo] && (
         <div className="mt-4 bg-white p-4 rounded shadow-md">
