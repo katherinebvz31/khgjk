@@ -54,16 +54,18 @@ const Home = () => {
           placeholder="Código"
           value={codigo}
           onChange={(e) => setCodigo(e.target.value)}
-          className="p-2 border rounded mr-2"
+          className="p-2 border rounded mr-2 text-black"
         />
         <input
           type="number"
           placeholder="Cantidad"
           value={cantidad}
           onChange={(e) => setCantidad(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded text-black"
         />
-        <button onClick={agregarSalida} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Agregar</button>
+        <button onClick={agregarSalida} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">
+          Agregar
+        </button>
       </div>
       {productos[codigo] && (
         <div className="mt-4 bg-white p-4 rounded shadow-md">
@@ -75,21 +77,21 @@ const Home = () => {
       <table className="mt-4 w-full bg-white rounded shadow-md">
         <thead>
           <tr>
-            <th>Fecha</th>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Unidad</th>
-            <th>Cantidad</th>
+            <th className="p-2 border text-[#08422a] font-bold">Fecha</th>
+            <th className="p-2 border text-[#08422a] font-bold">Código</th>
+            <th className="p-2 border text-[#08422a] font-bold">Nombre</th>
+            <th className="p-2 border text-[#08422a] font-bold">Unidad</th>
+            <th className="p-2 border text-[#08422a] font-bold">Cantidad</th>
           </tr>
         </thead>
         <tbody>
           {salidas.map((salida, index) => (
             <tr key={index}>
-              <td>{salida.fecha}</td>
-              <td>{salida.codigo}</td>
-              <td>{salida.nombre}</td>
-              <td>{salida.unidad}</td>
-              <td>{salida.cantidad}</td>
+              <td className="p-2 border text-black">{salida.fecha}</td>
+              <td className="p-2 border text-black">{salida.codigo}</td>
+              <td className="p-2 border text-black">{salida.nombre}</td>
+              <td className="p-2 border text-black">{salida.unidad}</td>
+              <td className="p-2 border text-black">{salida.cantidad}</td>
             </tr>
           ))}
         </tbody>
