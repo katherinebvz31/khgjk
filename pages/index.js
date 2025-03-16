@@ -52,8 +52,9 @@ const Home = () => {
           Registro de Salidas
         </h1>
         <div className="mt-4 flex justify-center">
+          {/* Campo "Código" configurado para aceptar solo números */}
           <input
-            type="text"
+            type="number"
             placeholder="Código"
             value={codigo}
             onChange={(e) => setCodigo(e.target.value)}
@@ -75,7 +76,7 @@ const Home = () => {
         </div>
 
         {productos[codigo] && (
-          <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center w-full max-w-xs">
+          <div className="mt-4 bg-white p-4 rounded shadow flex flex-col items-center w-full max-w-xs mx-auto">
             <h2 className="text-xl font-bold text-black">
               {productos[codigo].PRODUCTO}
             </h2>
