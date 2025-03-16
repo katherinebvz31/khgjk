@@ -37,7 +37,7 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    // Se agregan al inicio para que los registros más recientes aparezcan primero
+    // Agregamos el nuevo registro al inicio para que los más recientes aparezcan primero
     setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
@@ -48,12 +48,12 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[200px]">
-        <h1 className="text-center text-3xl font-bold text-white">
+      <div className="max-w-4xl mx-auto mt-[200px] bg-[#fcf9e6] p-6 rounded shadow-lg">
+        <h1 className="text-center text-3xl font-bold text-[#08422a]">
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs, botón y casillero de imagen fijo */}
+        {/* Fila de inputs, botón y recuadro de imagen fijo */}
         <div className="mt-6 flex items-center justify-center gap-4">
           <input
             type="number"
@@ -71,7 +71,7 @@ const Home = () => {
           />
           <button
             onClick={agregarSalida}
-            className="bg-black text-white px-6 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
+            className="bg-[#08422a] text-white px-6 py-2 rounded hover:bg-white hover:text-[#08422a] transition-colors duration-300 shadow-sm"
           >
             Agregar
           </button>
@@ -95,10 +95,12 @@ const Home = () => {
         {/* Vista previa del producto (nombre y unidad) */}
         {productos[codigo] && (
           <div className="mt-6 text-center">
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-[#08422a]">
               {productos[codigo].PRODUCTO}
             </h2>
-            <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
+            <p className="text-[#08422a]">
+              Unidad: {productos[codigo].UNIDAD}
+            </p>
           </div>
         )}
 
@@ -134,7 +136,9 @@ const Home = () => {
                         alt="Producto"
                       />
                     ) : (
-                      <span className="text-gray-400 text-xs">Sin imagen</span>
+                      <span className="text-gray-400 text-xs">
+                        Sin imagen
+                      </span>
                     )}
                   </td>
                 </tr>
@@ -142,6 +146,7 @@ const Home = () => {
             </tbody>
           </table>
         </div>
+
       </div>
     </div>
   );
