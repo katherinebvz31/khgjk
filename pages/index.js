@@ -48,7 +48,7 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[200px]">
+      <div className="max-w-4xl mx-auto mt-[230px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
@@ -69,13 +69,12 @@ const Home = () => {
             onChange={(e) => setCantidad(e.target.value)}
             className="p-2 border rounded text-black shadow-sm"
           />
-         <button
-  onClick={agregarSalida}
-  className="bg-black text-white px-6 py-2 rounded active:bg-white active:text-black hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
->
-  Agregar
-</button>
-
+          <button
+            onClick={agregarSalida}
+            className="bg-black text-white px-6 py-2 rounded active:bg-white active:text-black hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
+          >
+            Agregar
+          </button>
           {/* Casillero de imagen fijo */}
           <div className="w-[100px] h-[100px] border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
             {productos[codigo] ? (
@@ -92,28 +91,6 @@ const Home = () => {
             )}
           </div>
         </div>
-
-        {/* Vista previa del producto con nombre, unidad y la imagen en la misma fila */}
-        {productos[codigo] && (
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-white">
-                {productos[codigo].PRODUCTO}
-              </h2>
-              <p className="text-white">Unidad: {productos[codigo].UNIDAD}</p>
-            </div>
-            <div className="w-[100px] h-[100px] border border-gray-300 rounded shadow-sm bg-white">
-              <div className="relative w-[100px] h-[100px]">
-                <Image
-                  src={`/imagenes/${codigo}.jpg`}
-                  layout="fill"
-                  objectFit="contain"
-                  alt="Producto"
-                />
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Tabla de registros con columna de imagen */}
         <div className="mt-8">
@@ -149,9 +126,7 @@ const Home = () => {
                         </div>
                       </div>
                     ) : (
-                      <span className="text-gray-400 text-xs">
-                        Sin imagen
-                      </span>
+                      <span className="text-gray-400 text-xs">Sin imagen</span>
                     )}
                   </td>
                 </tr>
@@ -166,3 +141,4 @@ const Home = () => {
 };
 
 export default dynamic(() => Promise.resolve(Home), { ssr: false });
+
