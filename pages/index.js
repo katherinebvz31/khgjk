@@ -59,7 +59,9 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cover bg-center p-4" style={{ backgroundImage: "url('/fondo.jpg')" }}>
+   <div
+  className="min-h-screen bg-cover bg-center bg-no-repeat flex flex-col items-center p-4"
+  style={{ backgroundImage: "url('/fondo.jpg')" }}>
       <h1 className="text-white text-3xl font-bold">Registro de Salidas</h1>
       <div className="mt-4">
         <input
