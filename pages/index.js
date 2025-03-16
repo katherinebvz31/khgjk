@@ -11,13 +11,11 @@ const Home = () => {
   const [salidas, setSalidas] = useState([]);
 
   useEffect(() => {
-    async function cargarProductos() {
+    const cargarProductos = async () => {
       try {
         const response = await fetch("/productos.xlsx");
-        if (!response.ok) {
-          throw new Error(`No se pudo cargar productos.xlsx (Error ${response.status})`);
-        }
-
+        if (!response.ok) throw new Error("No se pudo cargar productos.xlsx");
+        
         const data = await response.arrayBuffer();
         const workbook = XLSX.read(data, { type: "array" });
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -25,21 +23,24 @@ const Home = () => {
 
         const productosMap = {};
         jsonData.forEach((producto) => {
-          productosMap[producto.Codigo] = producto;
+          productosMap[producto.Codigo] = {
+            Nombre: producto.Nombre,
+            Unidad: producto.Unidad,
+          };
         });
 
         setProductos(productosMap);
-        console.log("Productos cargados:", productosMap);
       } catch (error) {
-        console.error("Error al cargar el archivo de productos:", error);
+        console.error("Error al cargar productos:", error);
       }
-    }
+    };
 
     cargarProductos();
   }, []);
 
   const agregarSalida = () => {
     if (!productos[codigo] || !cantidad) return;
+    
     const nuevoRegistro = {
       fecha: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
       codigo,
@@ -47,6 +48,7 @@ const Home = () => {
       unidad: productos[codigo].Unidad,
       cantidad,
     };
+    
     setSalidas([...salidas, nuevoRegistro]);
     setCodigo("");
     setCantidad("");
@@ -55,6 +57,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-cover bg-center p-4" style={{ backgroundImage: "url('/fondo.jpg')" }}>
       <h1 className="text-white text-3xl font-bold">Registro de Salidas</h1>
+      
       <div className="mt-4">
         <input
           type="text"
@@ -72,6 +75,7 @@ const Home = () => {
         />
         <button onClick={agregarSalida} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Agregar</button>
       </div>
+
       {productos[codigo] && (
         <div className="mt-4 bg-white p-4 rounded shadow-md">
           <h2 className="text-xl font-bold">{productos[codigo].Nombre}</h2>
@@ -79,6 +83,7 @@ const Home = () => {
           <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
         </div>
       )}
+
       <table className="mt-4 w-full bg-white rounded shadow-md">
         <thead>
           <tr>
