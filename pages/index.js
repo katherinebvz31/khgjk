@@ -37,7 +37,6 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    // Agregamos el nuevo registro al inicio para que los más recientes aparezcan primero
     setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
@@ -48,26 +47,26 @@ const Home = () => {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
-      <div className="max-w-4xl mx-auto mt-[200px]">
+      <div className="max-w-4xl mx-auto mt-[230px]">
         <h1 className="text-center text-3xl font-bold text-white">
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs y botón (sin casillero de imagen) */}
+        {/* Fila de inputs, botón y casillero de imagen fijo */}
         <div className="mt-6 flex items-center justify-center gap-4">
           <input
             type="number"
             placeholder="Código"
             value={codigo}
             onChange={(e) => setCodigo(e.target.value)}
-            className="p-2 border rounded text-black shadow-sm"
+            className="w-20 p-2 border rounded text-black shadow-sm"
           />
           <input
             type="number"
             placeholder="Cantidad"
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
-            className="p-2 border rounded text-black shadow-sm"
+            className="w-20 p-2 border rounded text-black shadow-sm"
           />
           <button
             onClick={agregarSalida}
@@ -75,9 +74,24 @@ const Home = () => {
           >
             Agregar
           </button>
+          {/* Casillero de imagen fijo */}
+          <div className="w-[100px] h-[100px] border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
+            {productos[codigo] ? (
+              <div className="relative w-[100px] h-[100px]">
+                <Image
+                  src={`/imagenes/${codigo}.jpg`}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="Producto"
+                />
+              </div>
+            ) : (
+              <span className="text-gray-400 text-xs">Imagen</span>
+            )}
+          </div>
         </div>
 
-        {/* Vista previa del producto con nombre, unidad e imagen */}
+        {/* Vista previa del producto (solo nombre, unidad e imagen en una fila) */}
         {productos[codigo] && (
           <div className="mt-6 flex items-center justify-center gap-4">
             <div className="text-center">
