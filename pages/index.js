@@ -37,7 +37,7 @@ const Home = () => {
       unidad: productos[codigo].UNIDAD,
       cantidad,
     };
-    // Agregamos al inicio para que el registro más reciente aparezca primero
+    // Agregamos al inicio para que los registros más recientes aparezcan primero
     setSalidas([nuevoRegistro, ...salidas]);
     setCodigo("");
     setCantidad("");
@@ -53,9 +53,9 @@ const Home = () => {
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs y recuadro de imagen */}
+        {/* Fila de inputs y botón con casillero de imagen fijo al costado */}
         <div className="mt-6 flex items-center justify-center gap-4">
-          {/* Input Código: solo números */}
+          {/* Campo "Código": solo números */}
           <input
             type="number"
             placeholder="Código"
@@ -63,8 +63,7 @@ const Home = () => {
             onChange={(e) => setCodigo(e.target.value)}
             className="p-2 border rounded text-black shadow-sm"
           />
-
-          {/* Input Cantidad */}
+          {/* Campo "Cantidad" */}
           <input
             type="number"
             placeholder="Cantidad"
@@ -72,8 +71,14 @@ const Home = () => {
             onChange={(e) => setCantidad(e.target.value)}
             className="p-2 border rounded text-black shadow-sm"
           />
-
-          {/* Casillero de imagen: fijo, mostrando el producto si existe */}
+          {/* Botón Agregar */}
+          <button
+            onClick={agregarSalida}
+            className="bg-black text-white px-6 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
+          >
+            Agregar
+          </button>
+          {/* Casillero de imagen fijo al lado */}
           <div className="w-24 h-24 border border-gray-300 rounded flex items-center justify-center shadow-sm bg-white">
             {productos[codigo] ? (
               <Image
@@ -88,17 +93,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Botón Agregar */}
-        <div className="mt-4 flex justify-center">
-          <button
-            onClick={agregarSalida}
-            className="bg-black text-white px-6 py-2 rounded hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
-          >
-            Agregar
-          </button>
-        </div>
-
-        {/* Información del producto (opcional, si se desea mostrar arriba del registro) */}
+        {/* Vista previa del producto (se muestra si el código es válido) */}
         {productos[codigo] && (
           <div className="mt-6 text-center">
             <h2 className="text-2xl font-bold text-white">
@@ -108,7 +103,7 @@ const Home = () => {
           </div>
         )}
 
-        {/* Registro de salidas: los registros nuevos aparecen en la parte superior */}
+        {/* Tabla de registros con columna de imagen al final */}
         <div className="mt-8">
           <table className="w-full bg-white rounded shadow overflow-hidden">
             <thead className="bg-[#08422a] text-white">
@@ -118,6 +113,7 @@ const Home = () => {
                 <th className="p-2 border">Nombre</th>
                 <th className="p-2 border">Unidad</th>
                 <th className="p-2 border">Cantidad</th>
+                <th className="p-2 border">Imagen</th>
               </tr>
             </thead>
             <tbody>
@@ -128,6 +124,18 @@ const Home = () => {
                   <td className="p-2 border">{salida.nombre}</td>
                   <td className="p-2 border">{salida.unidad}</td>
                   <td className="p-2 border">{salida.cantidad}</td>
+                  <td className="p-2 border">
+                    {productos[salida.codigo] ? (
+                      <Image
+                        src={`/imagenes/${salida.codigo}.jpg`}
+                        width={50}
+                        height={50}
+                        alt="Producto"
+                      />
+                    ) : (
+                      <span className="text-gray-400 text-xs">Sin imagen</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
