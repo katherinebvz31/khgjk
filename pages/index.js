@@ -10,12 +10,10 @@ const Home = () => {
   const [productos, setProductos] = useState({});
   const [salidas, setSalidas] = useState([]);
 
-  // Función para obtener la fecha actual en formato YYYY-MM-DD
   const getTodayKey = () => {
     return new Date().toISOString().slice(0, 10);
   };
 
-  // Cargar registros del localStorage al cargar la página
   useEffect(() => {
     const todayKey = getTodayKey();
     const storedData = localStorage.getItem(`salidas-${todayKey}`);
@@ -24,13 +22,11 @@ const Home = () => {
     }
   }, []);
 
-  // Guardar cambios en localStorage cada vez que se actualiza "salidas"
   useEffect(() => {
     const todayKey = getTodayKey();
     localStorage.setItem(`salidas-${todayKey}`, JSON.stringify(salidas));
   }, [salidas]);
 
-  // Cargar productos desde el Excel
   useEffect(() => {
     fetch("/productos.xlsx")
       .then((res) => res.arrayBuffer())
@@ -46,7 +42,6 @@ const Home = () => {
       });
   }, []);
 
-  // Agregar salida al registro
   const agregarSalida = () => {
     if (!productos[codigo] || !cantidad) {
       console.warn("⚠️ Código no encontrado en la base de datos o cantidad vacía");
@@ -65,13 +60,11 @@ const Home = () => {
     setCantidad("");
   };
 
-  // Eliminar registro de la lista y del localStorage
   const eliminarSalida = (id) => {
     const nuevasSalidas = salidas.filter((salida) => salida.id !== id);
     setSalidas(nuevasSalidas);
   };
 
-  // Descargar registros en un archivo Excel
   const downloadExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(salidas);
     const workbook = XLSX.utils.book_new();
@@ -153,13 +146,23 @@ const Home = () => {
             </thead>
             <tbody>
               {salidas.map((salida) => (
-                <tr key={salida.id} className="text-black relative group">
+                <tr key={salida.id} className="text-black">
                   <td className="p-2 border">{salida.fecha}</td>
                   <td className="p-2 border">{salida.codigo}</td>
                   <td className="p-2 border">{salida.nombre}</td>
                   <td className="p-2 border">{salida.unidad}</td>
-                  <td className="p-2 border">{salida.cantidad}</td>
-                  <td className="p-2 border flex items-center justify-center relative">
+                  <td className="p-2 border flex items-center justify-between">
+                    {salida.cantidad}
+                    {/* ❌ Botón de eliminar SIEMPRE visible */}
+                    <button
+                      onClick={() => eliminarSalida(salida.id)}
+                      className="ml-3 text-red-500 text-sm hover:text-red-700 transition"
+                      title="Eliminar"
+                    >
+                      ❌
+                    </button>
+                  </td>
+                  <td className="p-2 border flex items-center justify-center">
                     {productos[salida.codigo] ? (
                       <Image
                         src={`/imagenes/${salida.codigo}.jpg`}
@@ -170,14 +173,6 @@ const Home = () => {
                     ) : (
                       <span className="text-gray-400 text-xs">Sin imagen</span>
                     )}
-                    {/* ❌ Botón de eliminación discreto fuera de la tabla */}
-                    <button
-                      onClick={() => eliminarSalida(salida.id)}
-                      className="absolute -right-6 text-red-500 text-sm opacity-50 hover:opacity-100 hover:text-red-700 transition"
-                      title="Eliminar"
-                    >
-                      ❌
-                    </button>
                   </td>
                 </tr>
               ))}
