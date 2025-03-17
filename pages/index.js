@@ -31,7 +31,7 @@ const Home = () => {
       return;
     }
     const nuevoRegistro = {
-      id: Date.now(), // ID único para cada registro
+      id: Date.now(),
       fecha: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
       codigo,
       nombre: productos[codigo].PRODUCTO,
@@ -43,7 +43,7 @@ const Home = () => {
     setCantidad("");
   };
 
-  // ✅ Función para eliminar un registro por su ID
+  // ✅ Función para eliminar un registro
   const eliminarSalida = (id) => {
     const nuevasSalidas = salidas.filter((salida) => salida.id !== id);
     setSalidas(nuevasSalidas);
@@ -80,7 +80,7 @@ const Home = () => {
       </div>
 
       {productos[codigo] && (
-        <div className="mt-4 bg-white p-4 rounded shadow-md text-black">
+        <div className="mt-4 bg-white p-4 rounded shadow-md text-black flex flex-col items-center">
           <h2 className="text-xl font-bold">{productos[codigo].PRODUCTO}</h2>
           <p>Unidad: {productos[codigo].UNIDAD}</p>
           <Image src={`/imagenes/${codigo}.jpg`} width={100} height={100} alt="Producto" />
@@ -95,31 +95,11 @@ const Home = () => {
             <th className="p-3">Nombre</th>
             <th className="p-3">Unidad</th>
             <th className="p-3">Cantidad</th>
-            <th className="p-3">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {salidas.map((salida) => (
-            <tr key={salida.id} className="border-b border-gray-300">
+            <tr key={salida.id} className="border-b border-gray-300 relative group">
               <td className="p-3">{salida.fecha}</td>
-              <td className="p-3">{salida.codigo}</td>
-              <td className="p-3">{salida.nombre}</td>
-              <td className="p-3">{salida.unidad}</td>
-              <td className="p-3">{salida.cantidad}</td>
-              <td className="p-3">
-                <button 
-                  onClick={() => eliminarSalida(salida.id)} 
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
-                >
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+              <td className="p-3">{salida.cod
 
-export default dynamic(() => Promise.resolve(Home), { ssr: false });
