@@ -114,14 +114,14 @@ const Home = () => {
             placeholder="Código"
             value={codigo}
             onChange={(e) => setCodigo(e.target.value)}
-            className="w-20 p-2 border rounded text-black shadow-sm"
+            className="w-32 p-2 border rounded text-black shadow-sm"
           />
           <input
             type="number"
             placeholder="Cantidad"
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
-            className="w-20 p-2 border rounded text-black shadow-sm"
+            className="w-32 p-2 border rounded text-black shadow-sm"
           />
           <button
             onClick={agregarSalida}
@@ -130,6 +130,24 @@ const Home = () => {
             Agregar
           </button>
         </div>
+
+        {/* Vista previa del producto */}
+        {productos[codigo] && (
+          <div className="mt-6 flex items-center justify-center gap-4 bg-white p-4 rounded shadow">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-black">{productos[codigo].PRODUCTO}</h2>
+              <p className="text-gray-700">Unidad: {productos[codigo].UNIDAD}</p>
+            </div>
+            <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center">
+              <Image
+                src={`/imagenes/${codigo}.jpg`}
+                width={80}
+                height={80}
+                alt="Producto"
+              />
+            </div>
+          </div>
+        )}
 
         {/* Tabla de registros con imagen y botón de eliminación */}
         <div className="mt-8">
@@ -142,30 +160,26 @@ const Home = () => {
                 <th className="p-2 border">Unidad</th>
                 <th className="p-2 border">Cantidad</th>
                 <th className="p-2 border">Imagen</th>
-                <th className="p-2 border"></th> {/* Espacio vacío para la ❌ */}
+                <th className="p-2 border"></th> {/* Espacio para el botón ❌ */}
               </tr>
             </thead>
             <tbody>
               {salidas.map((salida) => (
-                <tr key={salida.id} className="text-black relative group">
+                <tr key={salida.id} className="text-black">
                   <td className="p-2 border">{salida.fecha}</td>
                   <td className="p-2 border">{salida.codigo}</td>
                   <td className="p-2 border">{salida.nombre}</td>
                   <td className="p-2 border">{salida.unidad}</td>
                   <td className="p-2 border">{salida.cantidad}</td>
                   <td className="p-2 border flex items-center justify-center">
-                    {productos[salida.codigo] ? (
-                      <Image
-                        src={`/imagenes/${salida.codigo}.jpg`}
-                        width={100}
-                        height={100}
-                        alt="Producto"
-                      />
-                    ) : (
-                      <span className="text-gray-400 text-xs">Sin imagen</span>
-                    )}
+                    <Image
+                      src={`/imagenes/${salida.codigo}.jpg`}
+                      width={80}
+                      height={80}
+                      alt="Producto"
+                    />
                   </td>
-                  {/* ❌ Botón de eliminar FUERA de la tabla, sin fondo ni bordes */}
+                  {/* ❌ Botón de eliminar SIN fondo ni bordes */}
                   <td className="border-none bg-transparent">
                     <button
                       onClick={() => eliminarSalida(salida.id)}
