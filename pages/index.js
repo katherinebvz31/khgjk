@@ -101,5 +101,26 @@ const Home = () => {
           {salidas.map((salida) => (
             <tr key={salida.id} className="border-b border-gray-300 relative group">
               <td className="p-3">{salida.fecha}</td>
-              <td className="p-3">{salida.cod
+              <td className="p-3">{salida.codigo}</td>
+              <td className="p-3">{salida.nombre}</td>
+              <td className="p-3">{salida.unidad}</td>
+              <td className="p-3 relative">
+                {salida.cantidad}
+                {/* ❌ Botón de eliminar pequeño */}
+                <button 
+                  onClick={() => eliminarSalida(salida.id)} 
+                  className="absolute right-2 text-red-500 text-sm opacity-50 hover:opacity-100 hover:text-red-700 transition"
+                  title="Eliminar"
+                >
+                  ❌
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
+export default dynamic(() => Promise.resolve(Home), { ssr: false });
