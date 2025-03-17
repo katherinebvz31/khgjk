@@ -142,6 +142,7 @@ const Home = () => {
                 <th className="p-2 border">Unidad</th>
                 <th className="p-2 border">Cantidad</th>
                 <th className="p-2 border">Imagen</th>
+                <th className="p-2 border"></th> {/* Espacio vacío para la ❌ */}
               </tr>
             </thead>
             <tbody>
@@ -164,11 +165,11 @@ const Home = () => {
                       <span className="text-gray-400 text-xs">Sin imagen</span>
                     )}
                   </td>
-                  {/* ❌ Botón de eliminar FUERA de la tabla, alineado a la derecha */}
-                  <td className="pl-4">
+                  {/* ❌ Botón de eliminar FUERA de la tabla, sin fondo ni bordes */}
+                  <td className="border-none bg-transparent">
                     <button
                       onClick={() => eliminarSalida(salida.id)}
-                      className="text-red-500 text-lg font-bold hover:text-red-700 transition"
+                      className="text-red-500 text-lg font-bold hover:text-red-700 transition bg-transparent border-none"
                       title="Eliminar"
                     >
                       ❌
