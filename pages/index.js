@@ -146,22 +146,12 @@ const Home = () => {
             </thead>
             <tbody>
               {salidas.map((salida) => (
-                <tr key={salida.id} className="text-black">
+                <tr key={salida.id} className="text-black relative">
                   <td className="p-2 border">{salida.fecha}</td>
                   <td className="p-2 border">{salida.codigo}</td>
                   <td className="p-2 border">{salida.nombre}</td>
                   <td className="p-2 border">{salida.unidad}</td>
-                  <td className="p-2 border flex items-center justify-between">
-                    {salida.cantidad}
-                    {/* ❌ Botón de eliminar SIEMPRE visible */}
-                    <button
-                      onClick={() => eliminarSalida(salida.id)}
-                      className="ml-3 text-red-500 text-sm hover:text-red-700 transition"
-                      title="Eliminar"
-                    >
-                      ❌
-                    </button>
-                  </td>
+                  <td className="p-2 border">{salida.cantidad}</td>
                   <td className="p-2 border flex items-center justify-center">
                     {productos[salida.codigo] ? (
                       <Image
@@ -173,6 +163,16 @@ const Home = () => {
                     ) : (
                       <span className="text-gray-400 text-xs">Sin imagen</span>
                     )}
+                  </td>
+                  {/* ❌ Botón de eliminar completamente FUERA de la tabla */}
+                  <td className="absolute -right-6 top-1/2 transform -translate-y-1/2">
+                    <button
+                      onClick={() => eliminarSalida(salida.id)}
+                      className="text-red-500 text-sm hover:text-red-700 transition"
+                      title="Eliminar"
+                    >
+                      ❌
+                    </button>
                   </td>
                 </tr>
               ))}
