@@ -134,13 +134,14 @@ const Home = () => {
         {/* Vista previa del producto */}
         {productos[codigo] && (
           <div className="mt-4 flex items-center justify-center gap-4">
-            <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center shadow-sm overflow-hidden">
+            <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center shadow-sm">
               <Image
                 src={`/imagenes/${codigo}.jpg`}
                 width={96}
                 height={96}
                 alt="Producto"
                 className="object-contain bg-white"
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
               />
             </div>
             <span className="text-lg font-semibold text-white">{productos[codigo].PRODUCTO}</span>
@@ -170,13 +171,14 @@ const Home = () => {
                   <td className="p-2 border">{salida.unidad}</td>
                   <td className="p-2 border">{salida.cantidad}</td>
                   <td className="p-2 border flex items-center justify-center">
-                    <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center shadow-sm overflow-hidden">
+                    <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center shadow-sm">
                       <Image
                         src={`/imagenes/${salida.codigo}.jpg`}
                         width={96}
                         height={96}
                         alt="Producto"
                         className="object-contain bg-white"
+                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
                       />
                     </div>
                   </td>
