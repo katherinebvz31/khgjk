@@ -131,14 +131,14 @@ const Home = () => {
           </button>
         </div>
 
-        {/* Vista previa del producto */}
+        {/* Vista previa del producto con imagen más grande */}
         {productos[codigo] && (
           <div className="mt-4 flex items-center justify-center gap-2">
-            <div className="w-20 h-20 border border-gray-300 rounded bg-white shadow-sm flex items-center justify-center overflow-hidden">
+            <div className="w-28 h-28 border border-gray-300 rounded bg-white shadow-sm flex items-center justify-center overflow-hidden">
               <Image
                 src={`/imagenes/${codigo}.jpg`}
-                width={60}
-                height={60}
+                width={100}
+                height={100}
                 alt="Producto"
                 className="object-contain"
               />
@@ -147,7 +147,7 @@ const Home = () => {
           </div>
         )}
 
-        {/* Tabla de registros con imágenes bien contenidas */}
+        {/* Tabla de registros con imágenes más grandes */}
         <div className="mt-8">
           <table className="w-full bg-white rounded shadow overflow-hidden">
             <thead className="bg-[#08422a] text-white">
@@ -170,11 +170,11 @@ const Home = () => {
                   <td className="p-2 border">{salida.unidad}</td>
                   <td className="p-2 border">{salida.cantidad}</td>
                   <td className="p-2 border flex items-center justify-center">
-                    <div className="w-20 h-20 border border-gray-300 rounded bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                    <div className="w-28 h-28 border border-gray-300 rounded bg-white shadow-sm flex items-center justify-center overflow-hidden">
                       <Image
                         src={`/imagenes/${salida.codigo}.jpg`}
-                        width={60}
-                        height={60}
+                        width={100}
+                        height={100}
                         alt="Producto"
                         className="object-contain"
                       />
