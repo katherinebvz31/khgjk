@@ -131,21 +131,17 @@ const Home = () => {
           </button>
         </div>
 
-        {/* Vista previa del producto */}
+        {/* Vista previa del producto (sin recuadro grande) */}
         {productos[codigo] && (
-          <div className="mt-6 flex items-center justify-center gap-4 bg-white p-4 rounded shadow">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-black">{productos[codigo].PRODUCTO}</h2>
-              <p className="text-gray-700">Unidad: {productos[codigo].UNIDAD}</p>
-            </div>
-            <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center">
-              <Image
-                src={`/imagenes/${codigo}.jpg`}
-                width={80}
-                height={80}
-                alt="Producto"
-              />
-            </div>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <Image
+              src={`/imagenes/${codigo}.jpg`}
+              width={60}
+              height={60}
+              alt="Producto"
+              className="border border-gray-300 rounded shadow-sm"
+            />
+            <span className="text-lg font-semibold text-white">{productos[codigo].PRODUCTO}</span>
           </div>
         )}
 
@@ -174,8 +170,8 @@ const Home = () => {
                   <td className="p-2 border flex items-center justify-center">
                     <Image
                       src={`/imagenes/${salida.codigo}.jpg`}
-                      width={80}
-                      height={80}
+                      width={60}
+                      height={60}
                       alt="Producto"
                     />
                   </td>
