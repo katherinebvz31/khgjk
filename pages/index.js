@@ -131,23 +131,23 @@ const Home = () => {
           </button>
         </div>
 
-        {/* Vista previa del producto con imagen más visible */}
+        {/* Vista previa del producto */}
         {productos[codigo] && (
           <div className="mt-4 flex items-center justify-center gap-4">
-            <div className="w-24 h-24 border border-gray-300 rounded bg-white shadow-sm flex items-center justify-center overflow-hidden">
+            <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center shadow-sm overflow-hidden">
               <Image
                 src={`/imagenes/${codigo}.jpg`}
-                width={80}
-                height={80}
+                width={96}
+                height={96}
                 alt="Producto"
-                className="object-contain"
+                className="object-contain bg-white"
               />
             </div>
             <span className="text-lg font-semibold text-white">{productos[codigo].PRODUCTO}</span>
           </div>
         )}
 
-        {/* Tabla de registros con imágenes más visibles */}
+        {/* Tabla de registros con imágenes ajustadas */}
         <div className="mt-8">
           <table className="w-full bg-white rounded shadow overflow-hidden">
             <thead className="bg-[#08422a] text-white">
@@ -170,13 +170,13 @@ const Home = () => {
                   <td className="p-2 border">{salida.unidad}</td>
                   <td className="p-2 border">{salida.cantidad}</td>
                   <td className="p-2 border flex items-center justify-center">
-                    <div className="w-24 h-24 border border-gray-300 rounded bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                    <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center shadow-sm overflow-hidden">
                       <Image
                         src={`/imagenes/${salida.codigo}.jpg`}
-                        width={80}
-                        height={80}
+                        width={96}
+                        height={96}
                         alt="Producto"
-                        className="object-contain"
+                        className="object-contain bg-white"
                       />
                     </div>
                   </td>
