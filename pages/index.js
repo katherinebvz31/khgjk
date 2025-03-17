@@ -87,40 +87,43 @@ const Home = () => {
         </div>
       )}
 
-      <table className="mt-6 w-full bg-white text-black rounded shadow-md">
-        <thead>
-          <tr className="bg-gray-200 text-lg">
-            <th className="p-3">Fecha</th>
-            <th className="p-3">Código</th>
-            <th className="p-3">Nombre</th>
-            <th className="p-3">Unidad</th>
-            <th className="p-3">Cantidad</th>
-          </tr>
-        </thead>
-        <tbody>
-          {salidas.map((salida) => (
-            <tr key={salida.id} className="border-b border-gray-300 relative group">
-              <td className="p-3">{salida.fecha}</td>
-              <td className="p-3">{salida.codigo}</td>
-              <td className="p-3">{salida.nombre}</td>
-              <td className="p-3">{salida.unidad}</td>
-              <td className="p-3 relative">
-                {salida.cantidad}
-                {/* ❌ Botón de eliminar pequeño */}
-                <button 
-                  onClick={() => eliminarSalida(salida.id)} 
-                  className="absolute right-2 text-red-500 text-sm opacity-50 hover:opacity-100 hover:text-red-700 transition"
-                  title="Eliminar"
-                >
-                  ❌
-                </button>
-              </td>
+      <div className="mt-6 w-full bg-white text-black rounded shadow-md p-4">
+        <table className="w-full">
+          <thead>
+            <tr className="bg-gray-200 text-lg">
+              <th className="p-3">Fecha</th>
+              <th className="p-3">Código</th>
+              <th className="p-3">Nombre</th>
+              <th className="p-3">Unidad</th>
+              <th className="p-3">Cantidad</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {salidas.map((salida) => (
+              <tr key={salida.id} className="border-b border-gray-300 relative">
+                <td className="p-3">{salida.fecha}</td>
+                <td className="p-3">{salida.codigo}</td>
+                <td className="p-3">{salida.nombre}</td>
+                <td className="p-3">{salida.unidad}</td>
+                <td className="p-3 flex justify-between">
+                  {salida.cantidad}
+                  {/* ❌ Botón de eliminar fuera de la tabla */}
+                  <button 
+                    onClick={() => eliminarSalida(salida.id)} 
+                    className="text-red-500 text-xs opacity-50 hover:opacity-100 hover:text-red-700 transition ml-4"
+                    title="Eliminar"
+                  >
+                    ❌
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
 export default dynamic(() => Promise.resolve(Home), { ssr: false });
+
