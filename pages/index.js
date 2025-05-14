@@ -36,23 +36,25 @@ const Home = () => {
         const jsonData = XLSX.utils.sheet_to_json(sheet);
         const productosMap = {};
         jsonData.forEach((producto) => {
-          productosMap[producto.CÓDIGO] = producto;
+          const codigoKey = String(producto.CÓDIGO).trim();
+          productosMap[codigoKey] = producto;
         });
         setProductos(productosMap);
       });
   }, []);
 
   const agregarSalida = () => {
-    if (!productos[codigo] || !cantidad) {
-      console.warn("⚠️ Código no encontrado en la base de datos o cantidad vacía");
+    const cod = String(codigo).trim();
+    if (!productos[cod] || !cantidad) {
+      alert("⚠️ Código no encontrado en la base de datos o cantidad vacía");
       return;
     }
     const nuevoRegistro = {
       id: Date.now(),
       fecha: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
-      codigo,
-      nombre: productos[codigo].PRODUCTO,
-      unidad: productos[codigo].UNIDAD,
+      codigo: cod,
+      nombre: productos[cod].PRODUCTO,
+      unidad: productos[cod].UNIDAD,
       cantidad,
     };
     setSalidas([nuevoRegistro, ...salidas]);
@@ -81,13 +83,14 @@ const Home = () => {
     URL.revokeObjectURL(url);
   };
 
+  const cod = String(codigo).trim();
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed p-4 overflow-y-auto"
       style={{ backgroundImage: "url('/fondo.jpg')" }}
     >
       <div className="max-w-4xl mx-auto mt-[200px] relative">
-        {/* Botón para descargar Excel */}
         <button
           onClick={downloadExcel}
           className="absolute top-4 right-4 bg-black p-2 rounded-full hover:bg-white hover:text-black transition-colors duration-300 shadow-sm"
@@ -107,7 +110,6 @@ const Home = () => {
           Registro de Salidas
         </h1>
 
-        {/* Fila de inputs y botón */}
         <div className="mt-6 flex items-center justify-center gap-4">
           <input
             type="number"
@@ -131,12 +133,11 @@ const Home = () => {
           </button>
         </div>
 
-        {/* Vista previa del producto */}
-        {productos[codigo] && (
+        {productos[cod] && (
           <div className="mt-4 flex items-center justify-center gap-4">
             <div className="w-24 h-24 border border-gray-300 rounded bg-white flex items-center justify-center shadow-sm">
               <Image
-                src={`/imagenes/${codigo}.jpg`}
+                src={`/imagenes/${cod}.jpg`}
                 width={96}
                 height={96}
                 alt="Producto"
@@ -144,11 +145,10 @@ const Home = () => {
                 style={{ width: "100%", height: "100%", objectFit: "contain" }}
               />
             </div>
-            <span className="text-lg font-semibold text-white">{productos[codigo].PRODUCTO}</span>
+            <span className="text-lg font-semibold text-white">{productos[cod].PRODUCTO}</span>
           </div>
         )}
 
-        {/* Tabla de registros con imágenes ajustadas */}
         <div className="mt-8">
           <table className="w-full bg-white rounded shadow overflow-hidden">
             <thead className="bg-[#08422a] text-white">
@@ -159,7 +159,7 @@ const Home = () => {
                 <th className="p-2 border">Unidad</th>
                 <th className="p-2 border">Cantidad</th>
                 <th className="p-2 border">Imagen</th>
-                <th className="p-2 border"></th> {/* Espacio para el botón ❌ */}
+                <th className="p-2 border"></th>
               </tr>
             </thead>
             <tbody>
@@ -196,7 +196,6 @@ const Home = () => {
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   );
