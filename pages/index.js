@@ -145,7 +145,10 @@ const Home = () => {
                 style={{ width: "100%", height: "100%", objectFit: "contain" }}
               />
             </div>
-            <span className="text-lg font-semibold text-white">{productos[cod].PRODUCTO}</span>
+            <div className="text-white">
+              <p className="text-lg font-semibold">{productos[cod].PRODUCTO}</p>
+              <p className="text-sm italic">Unidad: {productos[cod].UNIDAD}</p>
+            </div>
           </div>
         )}
 
